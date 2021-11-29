@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body></body>
+<script>
+    // a,b
+    var xhr=new XMLHttpRequest();
+    xhr.open('GET',"https://restcountries.com/v3.1/all")
+    xhr.send();
+    xhr.onload=function(){
+        var country=JSON.parse(this.response);
+        var asia=country.filter((e)=>{
+            if(e.region==="Asia")
+            return e.name;
+        })
+        var country=JSON.parse(this.response);
+        var population=country.filter((e)=>{
+            if(e.population<200000)
+            return e.name;
+        })
+        console.log(population)
+        console.log(asia)
+    }
+
+    // c
+    var xhr=new XMLHttpRequest();
+    xhr.open('GET',"https://restcountries.com/v3.1/all");
+    xhr.send();
+    xhr.onload=function(){
+        var country=JSON.parse(this.response);
+        country.forEach((e)=>{
+            console.log(e.name,e.capital,e.flag);
+        })
+    }
+
+    // d
+    var xml=new XMLHttpRequest();
+    xml.open('GET',"https://restcountries.com/v3.1/all")
+    xml.send();
+    xml.onload=function(){
+        var country=JSON.parse(this.response)
+        var totPopulation=country.reduce((current,e)=>{
+            return current+e.population
+        },0)
+        console.log(totPopulation)
+    }
+    
+    // e
+    var xml=new XMLHttpRequest();
+    xml.open("GET","https://restcountries.com/v3.1/all")
+    xml.send();
+    xml.onload=function(){
+        var country=JSON.parse(this.response);
+        for(i=0;i<country.length;i++){
+            if(country[i].currencies[0].code==="USD"){
+                console.log("name:",country[i].name)
+            }
+        }
+    }
+</script>
+</html>
